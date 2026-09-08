@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    background-color: lightcyan;
+    font-family: sans-serif;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 0;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+}
+
+.contenedor-dashboard {
+    max-width: 900px;
+    margin: 2% auto;
+    background-color: #ffffff;
+    border: 3px solid black;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tarjeta-metrica {
+    border: 2px solid black;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tarjeta-metrica h3 {
+    margin-top: 0;
+    border-bottom: 2px solid #4bb4f8;
+    padding-bottom: 10px;
+    color: #333;
+}
+
+.numero-grande {
+    font-size: 60px;
+    font-weight: bold;
+    color: #4bb4f8;
+    margin: 10px 0;
+}
+
+.texto-normal p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.item-estadistica {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    font-size: 16px;
+}
+
+.botones-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.btn-volver {
+    background-color: #4bb4f8;
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
+    font-size: 20px;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-volver:hover {
+    background-color: #1177bb;
+    color: white;
+}
