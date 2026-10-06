@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='avistamientos/avistamientos.css') }}" />
+    <title>Listado de avistamientos</title>
+</head>
+<body>
+    <div class="contenedor-tabla">
+        <h1>Aves de Chile</h1>
+        <h2>Listado de Avistamientos</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Ave</th>
+                    <th scope="col">Lugar</th>
+                    <th scope="col">Fecha y Hora</th>
+                    <th scope="col">Voluntario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in avistamientos %}
+                <tr class="fila-clic"
+                    data-href="{{ url_for('detalle_avistamiento', avistamiento_id=a.id) }}"
+                    onclick="window.location.href = this.dataset.href">
+                    <td class="celda-foto">
+                        {% if a.ruta_archivo %}
+                            {% if es_video(a.ruta_archivo) %}
+                                <video class="img-tabla" src="{{ url_for('static', filename=a.ruta_archivo) }}" muted preload="metadata"></video>
+                            {% else %}
+                                <img class="img-tabla" src="{{ url_for('static', filename=a.ruta_archivo) }}" alt="Foto de {{ a.ave }}">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ url_for('detalle_avistamiento', avistamiento_id=a.id) }}">{{ a.ave }}</a></td>
+                    <td>{{ a.lugar }}</td>
+                    <td>{{ a.fecha_hora.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td>{{ a.voluntario }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Aún no hay avistamientos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav class="paginacion" aria-label="Navegación de páginas">
+            {% if pagina > 1 %}
+                <a class="pag-btn" href="{{ url_for('listado_avistamientos', pagina=pagina - 1) }}">&laquo; Anterior</a>
+            {% else %}
+                <span class="pag-btn deshabilitado">&laquo; Anterior</span>
+            {% endif %}
+
+            {% for p in range(1, total_paginas + 1) %}
+                <a class="pag-btn{% if p == pagina %} activo{% endif %}"
+                   {% if p == pagina %}aria-current="page"{% endif %}
+                   href="{{ url_for('listado_avistamientos', pagina=p) }}">{{ p }}</a>
+            {% endfor %}
+
+            {% if pagina < total_paginas %}
+                <a class="pag-btn" href="{{ url_for('listado_avistamientos', pagina=pagina + 1) }}">Siguiente &raquo;</a>
+            {% else %}
+                <span class="pag-btn deshabilitado">Siguiente &raquo;</span>
+            {% endif %}
+        </nav>
+
+        <div class="acciones">
+            <a class="pag-btn" href="{{ url_for('inicio') }}">Volver al inicio</a>
+            <a class="pag-btn" href="{{ url_for('nuevo_avistamiento') }}">Informar avistamiento</a>
+        </div>
+    </div>
+</body>
+</html>

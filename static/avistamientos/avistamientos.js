@@ -41,8 +41,7 @@ const renderTabla = () => {
     const inicio = (paginaActual - 1) * elementosPorPagina;
     const fin = inicio + elementosPorPagina;
     const datosPaginados = datosProcesados.slice(inicio, fin);
-
-    //Dibujar
+    
     cuerpoTabla.innerHTML = ""; 
     
     if (datosPaginados.length === 0) {
@@ -63,7 +62,6 @@ const renderTabla = () => {
     dibujarPaginacion(totalPaginas);
 };
 
-// botones dinamicos
 const dibujarPaginacion = (totalPaginas) => {
     contenedorPaginacion.innerHTML = "";
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='registro/registro.css') }}" />
+    <title>Registro</title>
+</head>
+<body>
+    <div class="forma">
+        <h1>Aves de Chile</h1>
+        <h2>Registro</h2>
+        
+        {% if errores %}
+            <div style="color: red; margin-bottom: 1rem;">
+                <ul>
+                    {% for campo, error in errores.items() %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if exito %}
+            <div id="exitoContainer" style="color: green; text-align: center; margin-bottom: 1rem;">
+                <p>¡Registro exitoso!</p>
+                <a href="{{ url_for('inicio') }}">Volver al inicio</a>
+                <a href="{{ url_for('nuevo_avistamiento', voluntario_id=exito) }}">Agregar avistamiento</a>
+            </div>
+        {% else %}
+            <form class="datos" id="login-form" action="{{ url_for('registro') }}" method="POST">
+                
+                <div id="nombrePersona" class="inputDatos">
+                    <label for="nombre">Nombre:</label>
+                    <input id="nombre" name="nombre" type="text" value="{{ datos.get('nombre', '') }}" required>
+                </div>
+                
+                <div id="comunaPersona" class="inputDatos">
+                    <label for="comunaTexto">Comuna:</label>
+                    <input id="comunaTexto" name="comuna_texto" type="text" list="listaComunas"
+                        autocomplete="off" placeholder="Escribe tu comuna" required
+                        value="{{ datos.get('comuna_texto', '') }}">
+                    <input id="comuna" name="comuna" type="hidden" value="{{ datos.get('comuna', '') }}">
+                    <datalist id="listaComunas">
+                        {% for c in comunas %}
+                            <option value="{{ c.nombre }}" data-id="{{ c.id }}"></option>
+                        {% endfor %}
+                    </datalist>
+                    <span class="error">{{ errores.get('comuna', '') }}</span>
+                </div>
+                
+                <div id="direccionPersona" class="inputDatos">
+                    <label for="direccion">Dirección:</label>
+                    <input id="direccion" name="direccion" type="text" value="{{ datos.get('direccion', '') }}" required>
+                </div>
+                
+                <div id="emailPersona" class="inputDatos">
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" value="{{ datos.get('email', '') }}" required>
+                </div>
+                
+                <div id="telefonoPersona" class="inputDatos">
+                    <label for="telefono">Número de teléfono:</label>
+                    <input id="telefono" name="telefono" type="text" value="{{ datos.get('telefono', '') }}" placeholder="Ej: +56912345678" required>
+                </div>
+                
+                <div id="contraseñaPersona" class="inputDatos">
+                    <label for="contraseña">Contraseña:</label>
+                    <input id="contraseña" name="contraseña" type="password" required>
+                </div>
+                
+                <div class="botones">
+                    <button type="submit" id="envio">Registrarse</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='registro/registro.js') }}"></script>
+</body>
+</html>

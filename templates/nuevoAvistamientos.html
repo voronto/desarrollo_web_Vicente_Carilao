@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='avistamientos/nuevoAvistamiento.css') }}" />
+    <title>Informar avistamiento</title>
+</head>
+<body>
+    <div class="forma">
+        <h1>Aves de Chile</h1>
+        <h2>Registrar avistamiento</h2>
+
+        {% if errores.get('general') %}
+            <p class="error">{{ errores['general'] }}</p>
+        {% endif %}
+
+        <form class="datos" id="formAvistamiento" method="POST"
+              action="{{ url_for('nuevo_avistamiento') }}" enctype="multipart/form-data">
+
+            <div class="inputDatos">
+                <label for="voluntario">Voluntario:</label>
+                <select id="voluntario" name="voluntario_id" required>
+                    <option value="">Selecciona un voluntario</option>
+                    {% for v in voluntarios %}
+                        <option value="{{ v.id }}" {% if datos.get('voluntario_id') == v.id|string %}selected{% endif %}>{{ v.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <span class="error">{{ errores.get('voluntario_id', '') }}</span>
+            </div>
+
+            <div class="inputDatos">
+                <label for="ave">Ave:</label>
+                <select id="ave" name="ave_id" required>
+                    <option value="">Selecciona un ave</option>
+                    {% for a in aves %}
+                        <option value="{{ a.id }}" {% if datos.get('ave_id') == a.id|string %}selected{% endif %}>{{ a.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <span class="error">{{ errores.get('ave_id', '') }}</span>
+            </div>
+
+            <div class="inputDatos">
+                <label for="lugarAvistamiento">Lugar de avistamiento:</label>
+                <input id="lugarAvistamiento" name="lugar" type="text" maxlength="200"
+                       value="{{ datos.get('lugar', '') }}" required>
+                <span class="error">{{ errores.get('lugar', '') }}</span>
+            </div>
+
+            <div class="inputDatos">
+                <label for="fechaAvistamiento">Fecha de avistamiento:</label>
+                <input id="fechaAvistamiento" name="fecha" type="date"
+                       value="{{ datos.get('fecha', '') }}" required>
+                <span class="error">{{ errores.get('fecha', '') }}</span>
+            </div>
+
+            <div class="inputDatos">
+                <label for="horaAvistamiento">Hora del avistamiento:</label>
+                <input id="horaAvistamiento" name="hora" type="time"
+                       value="{{ datos.get('hora', '') }}" required>
+            </div>
+
+            <div class="inputDatos">
+                <label for="descripcion">Descripción (opcional):</label>
+                <textarea id="descripcion" name="descripcion" rows="3" maxlength="500">{{ datos.get('descripcion', '') }}</textarea>
+                <span class="error">{{ errores.get('descripcion', '') }}</span>
+            </div>
+
+            <div class="inputDatos">
+                <label for="pruebaAvistamiento">Adjunta fotos o videos del avistamiento (máx. 5):</label>
+                <input id="pruebaAvistamiento" name="archivos" type="file"
+                       accept="image/*,video/*" multiple required>
+                <span class="error">{{ errores.get('archivos', '') }}</span>
+            </div>
+
+            <div class="botones">
+                <button type="submit" id="envio">Enviar</button>
+                <a class="volver" href="{{ url_for('inicio') }}">Volver al inicio</a>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='avistamientos/nuevoAvistamientos.js') }}"></script>
+</body>
+</html>
