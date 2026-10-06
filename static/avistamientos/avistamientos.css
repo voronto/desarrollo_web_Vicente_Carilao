@@ -1,0 +1,100 @@
+.contenedor-tabla {
+    max-width: 800px; 
+    margin: 2% auto;
+    background-color: #ffffff;
+    border: 3px solid black;
+    padding: 2rem;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #4bb4f8;
+}
+
+.celda-foto {
+    padding: 0; 
+    width: 150px; 
+}
+.img-tabla {
+    width: 100%;      
+    height: 100px;
+    display: block;   
+    object-fit: cover; 
+    border: none;     
+}
+
+/* filas clicables */
+.fila-clic {
+    cursor: pointer;
+}
+.fila-clic:hover {
+    background-color: #e6f4fe;
+}
+.fila-clic a {
+    color: black;
+    font-weight: bold;
+}
+
+/* paginación */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+.pag-btn {
+    padding: 5px 15px;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+    background-color: #fafafa;
+}
+.pag-btn.activo {
+    background-color: #4bb4f8;
+    color: white;
+}
+.pag-btn.deshabilitado {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+.acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* detalle del avistamiento */
+.detalle dt {
+    font-weight: bold;
+    margin-top: 12px;
+}
+.detalle dd {
+    margin: 0;
+}
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.galeria figure {
+    margin: 0;
+    max-width: 100%;
+}
+.galeria img,
+.galeria video {
+    max-width: 100%;
+    max-height: 400px;
+    border: 2px solid black;
+}
