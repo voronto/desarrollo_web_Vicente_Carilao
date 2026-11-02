@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}" />
+    <title>Ornitólogos Unidos - Inicio</title>
+</head>
+<body>
+    <div class="titulo">
+        <img src="{{ url_for('static', filename='imagenes/bandera.png') }}" class="img" alt="Bandera de Chile"/>
+        <h1>Aves de Chile</h1>
+        <img src="{{ url_for('static', filename='imagenes/condor.png') }}" class="img" alt="Cóndor andino"/>
+    </div>
+    
+    <nav>
+        <h2>Menú Principal</h2>
+        <a class="botones" href="{{ url_for('registro') }}">Registrar voluntario</a>
+        <a class="botones" href="{{ url_for('listado_avistamientos') }}">Listado de avistamientos</a>
+        <a class="botones" href="{{ url_for('nuevo_avistamiento') }}">Informar avistamiento</a>
+        <a class="botones" href="{{ url_for('estadisticas') }}">Estadísticas </a>
+    </nav>
+    <section class="ultimos">
+        <h2>Últimos avistamientos</h2>
+        <div class="tarjetas">
+            {% for a in ultimos %}
+            <article class="tarjeta">
+                {% if a.ruta_archivo %}
+                    {% if es_video(a.ruta_archivo) %}
+                        <video class="foto-tarjeta" src="{{ url_for('static', filename=a.ruta_archivo) }}" muted preload="metadata"></video>
+                    {% else %}
+                        <img class="foto-tarjeta" src="{{ url_for('static', filename=a.ruta_archivo) }}" alt="Foto de {{ a.ave }}">
+                    {% endif %}
+                {% endif %}
+                <h3>{{ a.ave }}</h3>
+                <p>Lugar: {{ a.lugar }}</p>
+                <p>Fecha: {{ a.fecha_hora.strftime('%d-%m-%Y %H:%M') }}</p>
+                <p>Informado por: {{ a.voluntario }}</p>
+                <a class="ver-detalle" href="{{ url_for('detalle_avistamiento', avistamiento_id=a.id) }}">Ver detalle</a>
+            </article>
+            {% else %}
+            <p>Aún no hay avistamientos registrados.</p>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>
