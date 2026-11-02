@@ -1,0 +1,82 @@
+
+#lista-comentarios {
+list-style-type: none;
+padding-left: 0;
+margin-bottom: 30px;
+}
+
+#lista-comentarios li {
+background-color: #fafafa;
+border: 1px solid black;
+padding: 15px;
+margin-bottom: 15px;
+}
+
+#lista-comentarios li strong {
+color: #333;
+font-size: 1.1em;
+}
+
+#lista-comentarios li em {
+color: #777;
+font-size: 0.9em;
+}
+
+#lista-comentarios li br {
+margin-bottom: 8px;
+display: block;
+content: "";
+}
+
+
+#form-comentario {
+background-color: #e6f4fe; 
+border: 1px solid black;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+#form-comentario label {
+font-weight: bold;
+display: block;
+margin-bottom: 5px;
+}
+
+
+#form-comentario input[type="text"],
+#form-comentario textarea {
+width: 100%;
+padding: 8px;
+border: 1px solid black;
+box-sizing: border-box; 
+font-family: inherit;
+margin-bottom: 15px;
+}
+
+#form-comentario textarea {
+resize: vertical; 
+}
+
+
+#form-comentario button[type="submit"] {
+padding: 8px 15px;
+border: 1px solid black;
+background-color: #4bb4f8;
+color: white;
+font-weight: bold;
+cursor: pointer;
+font-size: 1em;
+}
+
+#form-comentario button[type="submit"]:hover {
+background-color: #3aa3e7;
+}
+
+
+#mensaje-error {
+background-color: #fdf7f7;
+color: #d9534f;
+border: 1px solid #d9534f;
+padding: 10px;
+font-weight: bold;
+}
