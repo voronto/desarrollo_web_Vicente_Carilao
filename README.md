@@ -18,14 +18,3 @@ Esta es una aplicación web desarrollada con Flask y MySQL que permite a los usu
 
 En el sistema de comentarios, los textos ingresados por los usuarios se insertan directamente en el DOM mediante JavaScript. Para evitar la inyección de código malicioso (XSS). Esta función convierte caracteres sensibles (como `<`, `>`, `&`) en sus respectivas entidades HTML, asegurando que cualquier script ingresado se lea como texto plano.
 
-
-
-1. Clonar el repositorio.
-
-2. Crear y activar el entorno virtual (`python -m venv venv`).
-
-3. Instalar las dependencias (`pip install -r requirements.txt`).
-
-4. Configurar la base de datos MySQL usando los scripts SQL proporcionados.
-
-5. Ejecutar la aplicación: `flask run`.
