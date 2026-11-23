@@ -4,5 +4,5 @@ Módulo desarrollado en Spring Boot que se integra con la aplicación previa en 
 
 ## Decisiones de diseño
 
-* **Busquede por lugar en vez de por comuna: se decidio que en vez de mostrar la comuna al momento de buscar un avisitamiento mostrar el lugar de avistamiento declarado, principalmente porque al momento de ingresar un nuevo avistamiento no se pedia comuna.
+* Busquede por lugar en vez de por comuna: se decidio que en vez de mostrar la comuna al momento de buscar un avisitamiento mostrar el lugar de avistamiento declarado, principalmente porque al momento de ingresar un nuevo avistamiento no se pedia comuna.
 
