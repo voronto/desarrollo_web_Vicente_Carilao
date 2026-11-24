@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estadisticas/estadisticas.css') }}" />
+    <title>Estadísticas de Avistamientos</title>
+</head>
+<body>
+    <div class="contenedor-dashboard">
+        <h1>Aves de Chile</h1>
+        <h2>Panel de Estadísticas</h2>
+ 
+        <div class="dashboard-grid">
+            <section class="tarjeta-metrica">
+                <h3>Avistamientos por día</h3>
+                <div id="graficoDias" class="grafico"></div>
+            </section>
+ 
+            <section class="tarjeta-metrica">
+                <h3>Avistamientos por tipo de ave</h3>
+                <div id="graficoAves" class="grafico"></div>
+            </section>
+ 
+            <section class="tarjeta-metrica">
+                <h3>Voluntarios por comuna</h3>
+                <div id="graficoComunas" class="grafico"></div>
+            </section>
+        </div>
+ 
+    </div>
+
+    <div class="botones-container">
+            <a href="{{ url_for('inicio') }}" class="boton-volver">Volver al inicio</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.categories.min.js"></script>
+    <script src="{{ url_for('static', filename='estadisticas/estadisticas.js') }}"></script>
+</body>
+</html>
+

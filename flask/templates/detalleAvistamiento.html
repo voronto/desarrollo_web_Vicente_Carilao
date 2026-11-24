@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='avistamientos/avistamientos.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='avistamientos/comentarios.css') }}" />
+    <title>Detalle del avistamiento</title>
+</head>
+<body>
+    <div class="contenedor-tabla">
+        <h1>Aves de Chile</h1>
+        <h2>Detalle del avistamiento</h2>
+
+        <dl class="detalle">
+            <dt>Ave</dt>
+            <dd>{{ avistamiento.ave }}</dd>
+            <dt>Lugar</dt>
+            <dd>{{ avistamiento.lugar }}</dd>
+            <dt>Fecha y hora</dt>
+            <dd>{{ avistamiento.fecha_hora.strftime('%d-%m-%Y %H:%M') }}</dd>
+            <dt>Informado por</dt>
+            <dd>{{ avistamiento.voluntario }}</dd>
+            <dt>Descripción</dt>
+            <dd>{{ avistamiento.descripcion or 'Sin descripción' }}</dd>
+        </dl>
+
+        <h3>Fotos y videos</h3>
+        <div class="galeria">
+            {% for archivo in archivos %}
+            <figure>
+                {% if es_video(archivo.ruta_archivo) %}
+                    <video src="{{ url_for('static', filename=archivo.ruta_archivo) }}" controls preload="metadata"></video>
+                {% else %}
+                    <img src="{{ url_for('static', filename=archivo.ruta_archivo) }}" alt="Foto de {{ avistamiento.ave }}">
+                {% endif %}
+                <figcaption>{{ archivo.nombre_archivo }}</figcaption>
+            </figure>
+            {% else %}
+            <p>Este avistamiento no tiene archivos.</p>
+            {% endfor %}
+        </div>
+
+        <!-- comentarios -->
+        <div class="seccion-comentarios">
+
+            <h3>Comentarios</h3>
+            <ul id="lista-comentarios" class="lista-comentarios">
+                <!-- Los comentarios se cargarán aquí -->
+            </ul>
+
+            <div class="contenedor-form-comentario">
+                <h4>Agregar comentario</h4>
+                <form id="form-comentario" class="form-comentario">
+                    <!-- pasar el ID al JS -->
+                    <input type="hidden" id="avistamiento_id" value="{{ avistamiento.id }}">
+
+                    <!-- errores de validación -->
+                    <div id="mensaje-error" class="mensaje-error" style="display: none;"></div>
+
+                    <div class="grupo-input">
+                        <label for="nombre">Nombre de comentarista:</label>
+                        <input type="text" id="nombre" name="nombre" minlength="3" maxlength="50" required>
+                    </div>
+                    
+                    <div class="grupo-input">
+                        <label for="texto">Comentario:</label>
+                        <textarea id="texto" name="texto" rows="3" cols="40" minlength="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="pag-btn activo">Agregar comentario</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="acciones">
+            <a class="pag-btn" href="{{ url_for('listado_avistamientos') }}">Volver al listado</a>
+            <a class="pag-btn" href="{{ url_for('inicio') }}">Volver al inicio</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='avistamientos/comentarios.js') }}"></script>
+</body>
+</html>

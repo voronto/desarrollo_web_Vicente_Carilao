@@ -1,0 +1,30 @@
+{
+  "get_todas_las_comunas": "SELECT id, nombre FROM comuna ORDER BY nombre",
+  "get_regiones": "SELECT id, nombre FROM region ORDER BY id",
+  "get_comunas_by_region": "SELECT id, nombre FROM comuna WHERE region_id = :region_id ORDER BY nombre",
+  "comuna_pertenece_a_region": "SELECT id FROM comuna WHERE id = :comuna_id AND region_id = :region_id",
+  
+  "get_aves": "SELECT id, nombre FROM ave ORDER BY nombre",
+  "get_ave_by_id": "SELECT id, nombre FROM ave WHERE id = :ave_id",
+
+  "get_voluntarios": "SELECT id, nombre FROM voluntario ORDER BY nombre",
+  "get_voluntario_by_id": "SELECT id, nombre, email, telefono, fecha_registro, comuna_id FROM voluntario WHERE id = :voluntario_id",
+  "create_voluntario": "INSERT INTO voluntario (nombre, email, telefono, fecha_registro, comuna_id) VALUES (:nombre, :email, :telefono, NOW(), :comuna_id)",
+  
+
+  "create_avistamiento": "INSERT INTO avistamiento (voluntario_id, ave_id, fecha_hora, lugar, descripcion) VALUES (:voluntario_id, :ave_id, :fecha_hora, :lugar, :descripcion)",
+  "create_registro": "INSERT INTO registro (ruta_archivo, nombre_archivo, avistamiento_id) VALUES (:ruta_archivo, :nombre_archivo, :avistamiento_id)",
+
+  "get_avistamientos_por_dia": "SELECT DATE(fecha_hora) AS dia, COUNT(*) AS cantidad_avistamientos FROM avistamiento GROUP BY DATE(fecha_hora)",
+  "get_avistamientos_por_ave": "SELECT a.nombre AS nombre_ave, COUNT(av.id) AS cantidad_avistamientos FROM avistamiento av JOIN ave a ON av.ave_id = a.id GROUP BY a.id, a.nombre",
+  "get_voluntarios_por_comuna": "SELECT c.nombre AS nombre_comuna, COUNT(v.id) AS cantidad_voluntarios FROM voluntario v JOIN comuna c ON v.comuna_id = c.id GROUP BY c.id, c.nombre",
+
+  "create_comentario": "INSERT INTO comentario (nombre, texto, fecha, avistamiento_id) VALUES (:nombre, :texto, NOW(), :avistamiento_id)",
+  "get_comentarios_by_avistamiento": "SELECT id, nombre, texto, fecha FROM comentario WHERE avistamiento_id = :avistamiento_id ORDER BY fecha DESC",
+
+  "get_ultimos_avistamientos": "SELECT a.id, a.fecha_hora, a.lugar, av.nombre AS ave, v.nombre AS voluntario, (SELECT r.ruta_archivo FROM registro r WHERE r.avistamiento_id = a.id ORDER BY r.id LIMIT 1) AS ruta_archivo FROM avistamiento a JOIN ave av ON av.id = a.ave_id JOIN voluntario v ON v.id = a.voluntario_id ORDER BY a.id DESC LIMIT :limite",
+  "get_avistamientos_page": "SELECT a.id, a.fecha_hora, a.lugar, av.nombre AS ave, v.nombre AS voluntario, (SELECT r.ruta_archivo FROM registro r WHERE r.avistamiento_id = a.id ORDER BY r.id LIMIT 1) AS ruta_archivo FROM avistamiento a JOIN ave av ON av.id = a.ave_id JOIN voluntario v ON v.id = a.voluntario_id ORDER BY a.fecha_hora DESC, a.id DESC LIMIT :limite OFFSET :desplazamiento",
+  "count_avistamientos": "SELECT COUNT(*) FROM avistamiento",
+  "get_avistamiento_by_id": "SELECT a.id, a.fecha_hora, a.lugar, a.descripcion, av.nombre AS ave, v.nombre AS voluntario FROM avistamiento a JOIN ave av ON av.id = a.ave_id JOIN voluntario v ON v.id = a.voluntario_id WHERE a.id = :avistamiento_id",
+  "get_registros_by_avistamiento": "SELECT id, ruta_archivo, nombre_archivo FROM registro WHERE avistamiento_id = :avistamiento_id ORDER BY id"
+}

@@ -1,0 +1,85 @@
+h1 {
+    color:green;
+    text-align: center;
+    font-size: 50px;
+}
+
+h2 {
+    color:black;
+    text-align: center;
+
+}
+:root{
+    --color-borde: black;
+}
+.forma{
+    border: 3px solid var(--color-borde);
+    max-width: 350px;
+    margin: 2% auto;
+    padding: 2rem;
+    padding-top: .5rem;
+    background-color: #ffffff;
+}
+.datos{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.botones {
+  display: flex;
+  justify-content: right;
+
+}
+.inputDatos{
+    display: flex;
+    flex-direction: column;
+}
+label {
+  padding-bottom: 1rem;
+  cursor: pointer;
+}
+#envio {
+  background-color: #4bb4f8;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  padding: 2% 5%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#envio:hover {
+  background-color: #1177bb;
+}
+input, select{
+  border: 1px solid var(--color-borde);
+  background-color: #fafafa;
+  height: 40px;       
+  padding: 9px;
+  box-sizing: border-box; 
+}
+
+
+#exitoContainer {
+    display: flex;
+    flex-direction: row; 
+    gap: 15px; 
+    margin-top: 20px;
+}
+
+#exitoContainer a {
+    background-color: #4bb4f8;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    padding: 10px 5%;
+    text-align: center;
+    text-decoration: none; 
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+#exitoContainer a:hover {
+    background-color: #1177bb;
+}
